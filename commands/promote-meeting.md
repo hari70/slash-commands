@@ -15,8 +15,15 @@ Then follow the skill spec exactly. Key rules:
 Surface the full candidate list with proposed artifact types and ask for confirmation before writing a single file.
 
 **Two-pass classification:**
-1. Meeting type from frontmatter (customer-engagement / internal-1on1 / internal-practice / external-partner) → determines which artifact types are on the menu
+1. Meeting type from frontmatter — apply in strict priority order:
+   - `INT` in title → `internal-about-client` (client name in title is irrelevant — client was not present)
+   - `1:1` in title → `internal-1on1`
+   - `CoP / Delivery Review / Weekly / Practice` → `internal-practice`
+   - Client name in title AND client-side person tags → `customer-engagement`
+   - External partner name → `external-partner`
+   - Client name in title but all person tags are 3Cloud employees → `internal-about-client`
 2. Content signal scan of body → classifies each extractable item
+   - `internal-about-client` can produce ADRs and Client Context updates but NOT Client Requirements (client wasn't there)
 
 **Five artifact types and their destinations:**
 - ADR → `Clients/{name}/Architecture-Decisions/ADR-NNN.md` (client-level, never per-engagement)
