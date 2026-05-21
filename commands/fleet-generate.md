@@ -8,11 +8,11 @@ Special flags in `$ARGUMENTS`:
 
 ## Execution
 
-1. Read the methodology skill at `${VAULT_ROOT:-/AI-Projects/3cloud-vault/Hari_Work}/_System/skills/agent-fleet-generation.md` and follow it.
+1. Read the methodology skill at `${VAULT_ROOT:-/Users/harit/AI-Projects/3cloud-vault/Hari_Work}/_System/skills/agent-fleet-generation.md` and follow it.
 
 2. Read the Project Brief at the resolved path. Validate it exists, has frontmatter with `type`, and `status: approved`. If not approved, stop and ask the user to finalize the brief first.
 
-3. Read the project lifecycle skill for context on which phase we're in: `${VAULT_ROOT:-/AI-Projects/3cloud-vault/Hari_Work}/_System/skills/project-lifecycle.md`
+3. Read the project lifecycle skill for context on which phase we're in: `${VAULT_ROOT:-/Users/harit/AI-Projects/3cloud-vault/Hari_Work}/_System/skills/project-lifecycle.md`
 
 4. Analyze the brief and propose a fleet shape per the methodology. Format the proposal clearly:
 
@@ -40,7 +40,7 @@ Proceed with this fleet, or adjust?
 
 5. WAIT for explicit user approval. Do not generate before approval.
 
-6. After approval, read templates from `${VAULT_ROOT:-/AI-Projects/3cloud-vault/Hari_Work}/3Cloud-Practice/AI-Engineering/Templates/agent-fleet/` for each approved role.
+6. After approval, read templates from `${VAULT_ROOT:-/Users/harit/AI-Projects/3cloud-vault/Hari_Work}/Knowledge/Practice/AI-Engineering/Templates/agent-fleet/` for each approved role.
 
 7. Generate each agent file by:
    - Filling `{{}}` placeholders with values extracted from the brief
