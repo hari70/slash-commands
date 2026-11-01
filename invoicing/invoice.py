@@ -153,10 +153,20 @@ def cmd_init(a) -> None:
     ws.cell(row=trow, column=1).border = BOX
     for i in range(2, first_month):
         ws.cell(row=trow, column=i).border = BOX
+    # In a services tracker a month cell is a QUANTITY when the row has a Rate,
+    # so a plain SUM adds hours to dollars (54 h at $120 showed as "$54.00").
+    # Rate blank → the cell is the amount (x1); Rate set → quantity x rate —
+    # the same rule read_book applies, so the sheet and the invoice agree.
+    rate_col = get_column_letter(headers.index("Rate") + 1) if "Rate" in headers else None
     for j in range(len(months)):
         col = get_column_letter(first_month + j)
-        c = ws.cell(row=trow, column=first_month + j,
-                    value=f"=SUM({col}{HEAD_ROW+1}:{col}{trow-1})")
+        span = f"{col}{HEAD_ROW+1}:{col}{trow-1}"
+        if rate_col:
+            rates = f"${rate_col}${HEAD_ROW+1}:${rate_col}${trow-1}"
+            formula = f'=SUMPRODUCT({span},({rates}="")+{rates})'
+        else:
+            formula = f"=SUM({span})"
+        c = ws.cell(row=trow, column=first_month + j, value=formula)
         c.number_format, c.border = MONEY, BOX
         c.font = Font(bold=True, size=11, color=INK)
         c.fill = PatternFill("solid", fgColor="E3EAEF")
